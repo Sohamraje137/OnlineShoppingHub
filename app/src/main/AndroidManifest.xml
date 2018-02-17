@@ -25,6 +25,7 @@
         <activity android:name=".BabyAndKids"/>
         <activity android:name=".BooksMore"/>
         <activity android:name=".Men"/>
+        <activity android:name=".Mobiles"/>
 
     </application>
 

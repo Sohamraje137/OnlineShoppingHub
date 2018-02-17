@@ -18,7 +18,10 @@ import android.widget.Toast;
 
 public class Mobiles extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     String flipkart = "https://www.flipkart.com/search?as=off&as-show=on&count=40&otracker=start";
-    String output = "";
+    String amazon="https://www.amazon.in/s/ref=";
+    String outputf = "";
+    String outputa="";
+    String outputs="";
     String brand = "", ram = "", internal = "", battery = "", screen = "", sort = "";
     ActionBar actionBar;
     Spinner dropdownBrand, dropdownRam, dropdownInternalStorage, dropdownBattery, dropdownScreen, dropdownsort;
@@ -53,14 +56,14 @@ public class Mobiles extends AppCompatActivity implements AdapterView.OnItemSele
         dropdownInternalStorage.setOnItemSelectedListener(this);
         //adapter for battery
         dropdownBattery = (Spinner) findViewById(R.id.batterySize);
-        String[] itemsBattery = {"3000maH", "4000mah", "5000mah", "5000mah and above"};
+        String[] itemsBattery = {"3000maH", "4000mah", "5000mah", "6000mah"};
         ArrayAdapter<String> arrayAdapterbattery = new ArrayAdapter<String>(Mobiles.this, R.layout.spinner_row, itemsBattery);
         arrayAdapterBrand.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdownBattery.setAdapter(arrayAdapterbattery);
         dropdownBattery.setOnItemSelectedListener(this);
 
         dropdownScreen = (Spinner) findViewById(R.id.screenSize);
-        String[] itemsScreen = {"3 inch", "4 inch", "4.5 inch", " 5.5 inch", "5.5-5.9 inch", "6 inch"};
+        String[] itemsScreen = {"3 inch", "4 inch", "4.5 inch", "5 inch", "5.5-5.9 inch", "6 inch"};
         ArrayAdapter<String> arrayAdapterscreen = new ArrayAdapter<String>(Mobiles.this, R.layout.spinner_row, itemsScreen);
         arrayAdapterBrand.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdownScreen.setAdapter(arrayAdapterscreen);
@@ -109,22 +112,22 @@ public class Mobiles extends AppCompatActivity implements AdapterView.OnItemSele
 
     public void searchMobiles(View view) {
         if (brand.equals("I don't go by brand")) {
-            output = "mobile " + ram + " ram " + internal + " internal " + screen + " screen";
-            Toast.makeText(Mobiles.this, output, Toast.LENGTH_LONG).show();
+            outputf = "mobiles " + ram + " ram " + internal + " internal " + screen + " screen";
+            Toast.makeText(Mobiles.this, outputf, Toast.LENGTH_LONG).show();
         } else {
-            output = brand + " mobile " + ram + " ram " + internal + " internal " + screen + " screen";
-            Toast.makeText(Mobiles.this, output, Toast.LENGTH_LONG).show();
+            outputf = brand + " mobile " + ram + " ram " + internal + " internal " + screen + " screen ";
+            Toast.makeText(Mobiles.this, outputf, Toast.LENGTH_LONG).show();
         }
         if (sort.equals("Relevance"))
-            flipkart += "&q=" + output;
+            flipkart += "&q=" + outputf;
         else if (sort.equals("Popularity"))
-            flipkart += "&p%5B%5D=sort%3Dpopularity" + "&q=" + output;
+            flipkart += "&p%5B%5D=sort%3Dpopularity" + "&q=" + outputf;
         else if (sort.equals("Price-High to low"))
-            flipkart += "&p%5B%5D=sort%3Dprice_desc" + "&q=" + output;
+            flipkart += "&p%5B%5D=sort%3Dprice_desc" + "&q=" + outputf;
         else if (sort.equals("Price-Low to high"))
-            flipkart += "&p%5B%5D=sort%3Dprice_asc"+"&q=" + output;
+            flipkart += "&p%5B%5D=sort%3Dprice_asc"+"&q=" + outputf;
         else if (sort.equals("Newest first"))
-            flipkart += "&p%5B%5D=sort%3Drecency_desc"+"&q=" + output;
+            flipkart += "&p%5B%5D=sort%3Drecency_desc"+"&q=" + outputf;
         Intent i=new Intent(this,ShoppingActivity.class);
         i.putExtra("flipkart",flipkart);
         flipkart="https://www.flipkart.com/search?as=off&as-show=on&count=40&otracker=start";

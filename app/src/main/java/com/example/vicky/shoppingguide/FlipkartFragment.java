@@ -49,6 +49,17 @@ public class FlipkartFragment extends Fragment {
         settings.setJavaScriptEnabled(true);
         settings.setLoadWithOverviewMode(true);
         settings.setUseWideViewPort(true);
+        settings.setAllowFileAccess(true);
+        settings.setSupportZoom(true);
+        settings.setLoadsImagesAutomatically(true);
+        settings.setGeolocationEnabled(true);
+        settings.setRenderPriority(WebSettings.RenderPriority.HIGH);
+        settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        settings.setAppCacheEnabled(true);
+        settings.setDomStorageEnabled(true);
+        settings.setSavePassword(true);
+        settings.setSaveFormData(true);
+        settings.setEnableSmoothTransition(true);
         webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
 
         final AlertDialog alertDialog=new AlertDialog.Builder(getContext()).create();

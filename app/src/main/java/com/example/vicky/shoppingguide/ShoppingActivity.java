@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,8 +24,9 @@ public class ShoppingActivity extends AppCompatActivity {
 
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
+    static  final String TAG="Main";
     String flipkart="";
+    String amazon="";
     private ViewPager mViewPager;
 
     @Override
@@ -48,7 +50,7 @@ public class ShoppingActivity extends AppCompatActivity {
 
         Bundle bundle=getIntent().getExtras();
         flipkart=bundle.getString("flipkart");
-
+        amazon=bundle.getString("amazon");
 
     }
 
@@ -93,10 +95,14 @@ public class ShoppingActivity extends AppCompatActivity {
                   FlipkartFragment ff=new FlipkartFragment();
                   ff.setArguments(b);
                   return ff;
+
               case 1:
+                  Bundle b1=new Bundle();
+                  b1.putString("amazon",amazon);
                   AmazonFragment af=new AmazonFragment();
+                  af.setArguments(b1);
                   return af;
-              case 3:
+              case 2:
                   SnapdealFragment sf=new SnapdealFragment();
                   return sf;
               default:return null;

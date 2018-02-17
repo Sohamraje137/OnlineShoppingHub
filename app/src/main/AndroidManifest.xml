@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.vicky.shoppingguide">
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,14 +19,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Electronics"/>
-        <activity android:name=".Women"/>
-        <activity android:name=".Appliances"/>
-        <activity android:name=".BabyAndKids"/>
-        <activity android:name=".BooksMore"/>
-        <activity android:name=".Men"/>
-        <activity android:name=".Mobiles"/>
-
+        <activity android:name=".Electronics" />
+        <activity android:name=".Women" />
+        <activity android:name=".Appliances" />
+        <activity android:name=".BabyAndKids" />
+        <activity android:name=".BooksMore" />
+        <activity android:name=".Men" />
+        <activity android:name=".Mobiles" />
+        <activity
+            android:name=".ShoppingActivity"
+            android:label="@string/title_activity_shopping"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

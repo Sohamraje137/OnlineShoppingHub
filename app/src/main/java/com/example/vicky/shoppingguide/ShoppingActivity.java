@@ -27,6 +27,7 @@ public class ShoppingActivity extends AppCompatActivity {
     static  final String TAG="Main";
     String flipkart="";
     String amazon="";
+    String snapdeal="";
     private ViewPager mViewPager;
 
     @Override
@@ -51,7 +52,7 @@ public class ShoppingActivity extends AppCompatActivity {
         Bundle bundle=getIntent().getExtras();
         flipkart=bundle.getString("flipkart");
         amazon=bundle.getString("amazon");
-
+        snapdeal=bundle.getString("snapdeal");
     }
 
 
@@ -103,7 +104,10 @@ public class ShoppingActivity extends AppCompatActivity {
                   af.setArguments(b1);
                   return af;
               case 2:
+                  Bundle b2=new Bundle();
+                  b2.putString("snapdeal",snapdeal);
                   SnapdealFragment sf=new SnapdealFragment();
+                  sf.setArguments(b2);
                   return sf;
               default:return null;
           }

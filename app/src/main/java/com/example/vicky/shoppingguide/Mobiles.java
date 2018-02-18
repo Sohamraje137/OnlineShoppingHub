@@ -19,10 +19,9 @@ import android.widget.Toast;
 public class Mobiles extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     String flipkart = "https://www.flipkart.com/search?as=off&as-show=on&count=40&otracker=start";
     String amazon="https://www.amazon.in/s/ref=";
-
+    String snapdeal="https://www.snapdeal.com/search?keyword=";
     String output = "";
-    String outputa="";
-    String outputs="";
+
     String brand = "", ram = "", internal = "", battery = "", screen = "", sort = "";
     ActionBar actionBar;
     Spinner dropdownBrand, dropdownRam, dropdownInternalStorage, dropdownBattery, dropdownScreen, dropdownsort;
@@ -36,14 +35,14 @@ public class Mobiles extends AppCompatActivity implements AdapterView.OnItemSele
         actionBar.setDisplayHomeAsUpEnabled(true);
         //adapter for brand only
         dropdownBrand = (Spinner) findViewById(R.id.brandName);
-        String[] itemsBrand = {"I don't go by brand", "Samsung", "Apple", "Huawei", "Oppo", "Vivo", "LG", "Xiaomi", "Lenovo", "ZTE"};
+        String[] itemsBrand = {"I don't go by brand", "Samsung", "iPhone", "Huawei", "Oppo", "Vivo", "LG", "Xiaomi", "Lenovo", "ZTE"};
         ArrayAdapter<String> arrayAdapterBrand = new ArrayAdapter<String>(Mobiles.this, R.layout.spinner_row, itemsBrand);
         arrayAdapterBrand.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdownBrand.setAdapter(arrayAdapterBrand);
         dropdownBrand.setOnItemSelectedListener(this);
         //adapter for ram
         dropdownRam = (Spinner) findViewById(R.id.ramMobile);
-        String[] itemsRam = {"512MB", "1 GB", "2 GB", "3 GB", "4 GB", "6 GB and above"};
+        String[] itemsRam = {"1 GB", "2 GB", "3 GB", "4 GB", "6 GB"};
         ArrayAdapter<String> arrayAdapterRam = new ArrayAdapter<String>(Mobiles.this, R.layout.spinner_row, itemsRam);
         arrayAdapterBrand.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdownRam.setAdapter(arrayAdapterRam);
@@ -64,7 +63,7 @@ public class Mobiles extends AppCompatActivity implements AdapterView.OnItemSele
         dropdownBattery.setOnItemSelectedListener(this);
 
         dropdownScreen = (Spinner) findViewById(R.id.screenSize);
-        String[] itemsScreen = {"3 inch", "4 inch", "4.5 inch", "5 inch", "5.5-5.9 inch", "6 inch"};
+        String[] itemsScreen = {"3 inch", "4 inch", "4.5 inch", "5 inch", "5.5 inch", "6 inch"};
         ArrayAdapter<String> arrayAdapterscreen = new ArrayAdapter<String>(Mobiles.this, R.layout.spinner_row, itemsScreen);
         arrayAdapterBrand.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdownScreen.setAdapter(arrayAdapterscreen);
@@ -113,7 +112,7 @@ public class Mobiles extends AppCompatActivity implements AdapterView.OnItemSele
 
     public void searchMobiles(View view) {
         if (brand.equals("I don't go by brand")) {
-            output = "mobiles " + ram + " ram " + internal + " internal " + screen + " screen";
+            output = "mobile " + ram + " ram " + internal + " internal " + screen + " screen";
             //Toast.makeText(Mobiles.this, output, Toast.LENGTH_LONG).show();
         } else {
             output = brand + " mobile " + ram + " ram " + internal + " internal " + screen + " screen ";
@@ -121,39 +120,51 @@ public class Mobiles extends AppCompatActivity implements AdapterView.OnItemSele
         }
         if (sort.equals("Relevance")) {
             flipkart += "&q=" + output;
+
             amazon+="sr_st_relevanceblender";
             amazon+="?keywords="+output;
             amazon+="&sort=relevanceblender";
+
+            snapdeal+=output+"&sort=rlvncy";
         }
         else if (sort.equals("Popularity")) {
             flipkart += "&p%5B%5D=sort%3Dpopularity" + "&q=" + output;
             amazon+="ref=sr_st_review-rank";
             amazon+="?keywords="+output;
             amazon+="&sort=review-rank";
+
+            snapdeal+=output+"&sort=plrty";
         }
         else if (sort.equals("Price-High to low")) {
             flipkart += "&p%5B%5D=sort%3Dprice_desc" + "&q=" + output;
             amazon+="ref=sr_st_price-desc-rank";
             amazon+="?keywords="+output;
             amazon+="&sort=price-desc-rank";
+
+            snapdeal+=output+"&sort=phtl";
         }
         else if (sort.equals("Price-Low to high")) {
             flipkart += "&p%5B%5D=sort%3Dprice_asc" + "&q=" + output;
             amazon+="ref=sr_st_price-asc-rank";
             amazon+="?keywords="+output;
             amazon+="&sort=price-asc-rank";
+
+            snapdeal+=output+"&sort=plth";
         }
         else if (sort.equals("Newest first")) {
             flipkart += "&p%5B%5D=sort%3Drecency_desc" + "&q=" + output;
             amazon+="ref=sr_st_date-desc-rank";
             amazon+="?keywords="+output;
             amazon+="&sort=date-desc-rank";
+            snapdeal+=output+"&sort=rec";
         }
         Intent i=new Intent(this,ShoppingActivity.class);
         i.putExtra("flipkart",flipkart);
         i.putExtra("amazon",amazon);
+        i.putExtra("snapdeal",snapdeal);
         flipkart="https://www.flipkart.com/search?as=off&as-show=on&count=40&otracker=start";
         amazon="https://www.amazon.in/s/ref=";
+        snapdeal="https://www.snapdeal.com/search?keyword=";
         startActivity(i);
 
     }

@@ -17,6 +17,7 @@ import android.widget.RadioGroup;
  */
 
 public class FirstLaunchApplication extends AppCompatActivity {
+
     String mypreference="mypref";
     SharedPreferences sharedpreferences;
     EditText first,last;

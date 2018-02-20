@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -21,11 +22,12 @@ public class Mobiles extends AppCompatActivity implements AdapterView.OnItemSele
     String amazon="https://www.amazon.in/s/ref=";
     String snapdeal="https://www.snapdeal.com/search?keyword=";
     String output = "";
-
+    int flag;
     String brand = "", ram = "", internal = "", battery = "", screen = "", sort = "";
+    String method="";
     ActionBar actionBar;
-    Spinner dropdownBrand, dropdownRam, dropdownInternalStorage, dropdownBattery, dropdownScreen, dropdownsort;
-
+    Spinner dropdownMethod,dropdownBrand, dropdownRam, dropdownInternalStorage, dropdownBattery, dropdownScreen, dropdownsort;
+    EditText editText;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +35,16 @@ public class Mobiles extends AppCompatActivity implements AdapterView.OnItemSele
         actionBar = getSupportActionBar();
         actionBar.setTitle("Mobile Specification");
         actionBar.setDisplayHomeAsUpEnabled(true);
+        editText= (EditText) findViewById(R.id.productKeyword);
+        dropdownMethod = (Spinner) findViewById(R.id.searchMethod);
+        String[] itemsMethod = {"Search by Keyword","Search by specification"};
+        ArrayAdapter<String> arrayAdapterMethod = new ArrayAdapter<String>(Mobiles.this, R.layout.spinner_row, itemsMethod);
+        arrayAdapterMethod.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dropdownMethod.setAdapter(arrayAdapterMethod);
+        dropdownMethod.setOnItemSelectedListener(this);
+
+
+
         //adapter for brand only
         dropdownBrand = (Spinner) findViewById(R.id.brandName);
         String[] itemsBrand = {"I don't go by brand", "Samsung", "iPhone", "Huawei", "Oppo", "Vivo", "LG", "Xiaomi", "Lenovo", "ZTE"};
@@ -82,6 +94,23 @@ public class Mobiles extends AppCompatActivity implements AdapterView.OnItemSele
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
         switch (parent.getId()) {
+            case R.id.searchMethod:{
+                if(((String) parent.getItemAtPosition(position)).equals("Search by Keyword")) {
+                    editText.setVisibility(View.VISIBLE);
+                    flag=0;
+                }
+                else{
+                    dropdownBrand.setVisibility(View.VISIBLE);
+                    dropdownRam.setVisibility(View.VISIBLE);
+                    dropdownInternalStorage.setVisibility(View.VISIBLE);
+                    dropdownBattery.setVisibility(View.VISIBLE);
+                    dropdownScreen.setVisibility(View.VISIBLE);
+                    //dropdownsort.setVisibility(View.VISIBLE);
+                    editText.setVisibility(View.GONE);
+                    flag=1;
+                }
+            }
+
             case R.id.brandName:
                 brand = (String) parent.getItemAtPosition(position);
                 //Toast.makeText(parent.getContext(),"selected brand:"+brand,Toast.LENGTH_LONG).show();
@@ -111,7 +140,9 @@ public class Mobiles extends AppCompatActivity implements AdapterView.OnItemSele
     }
 
     public void searchMobiles(View view) {
-        if (brand.equals("I don't go by brand")) {
+        if(flag==0)
+            output=editText.getText().toString();
+        else if (flag==1 && brand.equals("I don't go by brand")) {
             output = "mobile " + ram + " ram " + internal + " internal " + screen + " screen";
             //Toast.makeText(Mobiles.this, output, Toast.LENGTH_LONG).show();
         } else {

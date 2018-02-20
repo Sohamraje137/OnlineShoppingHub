@@ -30,6 +30,7 @@
             android:name=".ShoppingActivity"
             android:label="@string/title_activity_shopping"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".FirstLaunchApplication"/>
     </application>
 
 </manifest>

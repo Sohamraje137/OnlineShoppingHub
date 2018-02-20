@@ -1,6 +1,7 @@
 package com.example.vicky.shoppingguide;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.icu.util.ULocale;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
+
         implements NavigationView.OnNavigationItemSelectedListener {
         protected  DrawerLayout drawer;
     @Override
@@ -26,7 +28,22 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        SharedPreferences settings=getSharedPreferences("prefs",0);
+        boolean firstRun=settings.getBoolean("firstRun",false);
+        if(firstRun==false)//if running for first time
+        //Splash will load for first time
+        {
+            SharedPreferences.Editor editor=settings.edit();
+            editor.putBoolean("firstRun",true);
+            editor.commit();
+            Intent i=new Intent(MainActivity.this,FirstLaunchApplication.class);
+            startActivity(i);
+            finish();
+        }
+        else
+        {
 
+        }
 
 
 

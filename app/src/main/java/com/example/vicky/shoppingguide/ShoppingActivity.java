@@ -34,7 +34,6 @@ public class ShoppingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -49,10 +48,13 @@ public class ShoppingActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
+
         Bundle bundle=getIntent().getExtras();
         flipkart=bundle.getString("flipkart");
         amazon=bundle.getString("amazon");
         snapdeal=bundle.getString("snapdeal");
+
+
     }
 
 

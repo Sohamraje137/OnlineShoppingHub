@@ -24,7 +24,7 @@ public class AmazonFragment extends Fragment {
     Context context;
     WebView webView;
     static  final String TAG="Main";
-    ProgressDialog progressDialog;
+   // ProgressDialog progressDialog;
     String string="";
 
     @Nullable
@@ -60,9 +60,10 @@ public class AmazonFragment extends Fragment {
 
 
 
+
         final AlertDialog alertDialog=new AlertDialog.Builder(getContext()).create();
-        progressDialog=ProgressDialog.show(getContext(),"Loading","Please wait...",true);
-        progressDialog.setCancelable(false);
+       /* progressDialog=ProgressDialog.show(getContext(),"Loading","Please wait...",true);
+        progressDialog.setCancelable(false);*/
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -75,8 +76,8 @@ public class AmazonFragment extends Fragment {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 Log.i(TAG,"Finished loading URL:"+url);
-                if(progressDialog.isShowing())
-                    progressDialog.dismiss();
+               /* if(progressDialog.isShowing())
+                    progressDialog.dismiss();*/
             }
 
             @Override

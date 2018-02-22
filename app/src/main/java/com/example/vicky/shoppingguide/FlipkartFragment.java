@@ -65,6 +65,7 @@ public class FlipkartFragment extends Fragment {
         final AlertDialog alertDialog=new AlertDialog.Builder(getContext()).create();
         progressDialog=ProgressDialog.show(getContext(),"Loading","Please wait...",true);
         progressDialog.setCancelable(false);
+
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -98,6 +99,7 @@ public class FlipkartFragment extends Fragment {
             }
         });
         webView.loadUrl(string);
+
 
     }
 }

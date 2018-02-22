@@ -97,6 +97,12 @@ public class Mobiles extends AppCompatActivity implements AdapterView.OnItemSele
             case R.id.searchMethod:{
                 if(((String) parent.getItemAtPosition(position)).equals("Search by Keyword")) {
                     editText.setVisibility(View.VISIBLE);
+                    dropdownBrand.setVisibility(View.GONE);
+                    dropdownRam.setVisibility(View.GONE);
+                    dropdownInternalStorage.setVisibility(View.GONE);
+                    dropdownBattery.setVisibility(View.GONE);
+                    dropdownScreen.setVisibility(View.GONE);
+
                     flag=0;
                 }
                 else{

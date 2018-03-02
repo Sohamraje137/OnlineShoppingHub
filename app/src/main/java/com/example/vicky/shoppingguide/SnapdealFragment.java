@@ -24,6 +24,7 @@ import android.widget.Toast;
 public class SnapdealFragment extends Fragment {
     private FloatingActionButton floatingActionButtonSD;
     Context context;
+    String currurl="";
     WebView webView;
     static  final String TAG="Main";
   //  ProgressDialog progressDialog;
@@ -68,6 +69,7 @@ public class SnapdealFragment extends Fragment {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 Log.i(TAG,"Processing webview URL click...");
                 view.loadUrl(url);
+                currurl=url;
                 return true;
             }
 

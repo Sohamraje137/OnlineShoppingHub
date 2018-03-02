@@ -30,6 +30,7 @@ public class FlipkartFragment extends Fragment {
     static  final String TAG="Main";
     ProgressDialog progressDialog;
     String string="";
+    String currurl="";
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -71,8 +72,9 @@ public class FlipkartFragment extends Fragment {
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                Log.i(TAG,"Processing webview URL click...");
+                Log.i(TAG,"Processing webview URL click..."+url);
                 view.loadUrl(url);
+                //currurl+=url;
                 return true;
             }
 
@@ -104,7 +106,19 @@ public class FlipkartFragment extends Fragment {
         floatingActionButtonFK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"FF FAb clicked",Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(),"FF FAb clicked",Toast.LENGTH_LONG).show();
+                currurl=webView.getUrl();
+                URL url=new URL();
+                url.setUrl(currurl);
+
+                MyDatabase database=new MyDatabase(getContext());
+                database.insertDatabase(url);
+                Toast.makeText(getContext(),"Data Inserted",Toast.LENGTH_LONG).show();
+
+               // Log.i(TAG,"Going into db:"+currurl);
+
+
+
             }
         });
 

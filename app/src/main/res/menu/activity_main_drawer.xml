@@ -10,6 +10,10 @@
             android:id="@+id/topsites"
             android:icon="@drawable/top_sites"
             android:title="Top Sites" />
+        <item
+            android:id="@+id/wishlist"
+            android:icon="@drawable/wishlistn"
+            android:title="Wish-List"/>
 
 
     </group>

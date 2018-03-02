@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:animateLayoutChanges="true"
+
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <io.github.ponnamkarthik.richlinkpreview.RichLinkView
+                android:id="@+id/richLinkView"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_margin="10dp">
+
+            </io.github.ponnamkarthik.richlinkpreview.RichLinkView>
+        <!--
+            <io.github.ponnamkarthik.richlinkpreview.RichLinkViewTelegram
+                android:layout_marginTop="16dp"
+                android:id="@+id/richLinkView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </io.github.ponnamkarthik.richlinkpreview.RichLinkViewTelegram>
+
+            <io.github.ponnamkarthik.richlinkpreview.RichLinkViewSkype
+                android:layout_marginTop="16dp"
+                android:id="@+id/richLinkView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </io.github.ponnamkarthik.richlinkpreview.RichLinkViewSkype>
+
+            <io.github.ponnamkarthik.richlinkpreview.RichLinkViewTwitter
+                android:layout_marginTop="16dp"
+                android:id="@+id/richLinkView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </io.github.ponnamkarthik.richlinkpreview.RichLinkViewTwitter>
+        -->
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

@@ -140,6 +140,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.contact_us:
                 fragment = new ContactUs();
                 break;
+            case R.id.wishlist:
+                fragment=new WishList();
+                break;
 
         }
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

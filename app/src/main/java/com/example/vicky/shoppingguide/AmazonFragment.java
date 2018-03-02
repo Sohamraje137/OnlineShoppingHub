@@ -25,6 +25,7 @@ public class AmazonFragment extends Fragment {
     private FloatingActionButton floatingActionButtonAM;
     Context context;
     WebView webView;
+    String currurl;
     static  final String TAG="Main";
    // ProgressDialog progressDialog;
     String string="";
@@ -73,6 +74,7 @@ public class AmazonFragment extends Fragment {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 Log.i(TAG,"Processing webview URL click...");
                 view.loadUrl(url);
+                currurl=url;
                 return true;
             }
 

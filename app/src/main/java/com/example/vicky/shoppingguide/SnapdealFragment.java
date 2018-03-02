@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import android.widget.Toast;
  */
 
 public class SnapdealFragment extends Fragment {
+    private FloatingActionButton floatingActionButtonSD;
     Context context;
     WebView webView;
     static  final String TAG="Main";
@@ -31,8 +33,9 @@ public class SnapdealFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.snapdeal_fragment,container,false);
         string=getArguments().getString("snapdeal");
-
+        floatingActionButtonSD= (FloatingActionButton) this.getActivity().findViewById(R.id.wishListSnapdeal);
         context=getActivity();
+
         return view;
     }
 
@@ -93,5 +96,12 @@ public class SnapdealFragment extends Fragment {
             }
         });
         webView.loadUrl(string);
+
+        floatingActionButtonSD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),"SD FAb clicked",Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

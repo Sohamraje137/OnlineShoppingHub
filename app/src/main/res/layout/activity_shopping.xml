@@ -62,21 +62,65 @@
     </android.support.v4.view.ViewPager>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/wishListFlipkart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_gravity="bottom"
         android:layout_margin="16dp"
+
+
         android:clickable="true"
         android:focusable="true"
-        android:visibility="visible"
+        android:visibility="gone"
         app:backgroundTint="@color/colorPrimaryDark"
         app:fabSize="normal"
         app:layout_anchor="@+id/container"
         app:layout_anchorGravity="right|bottom"
-        app:srcCompat="@drawable/wishlist" />
+        app:srcCompat="@drawable/wishlist"
+        tools:layout_editor_absoluteX="312dp"
+        tools:layout_editor_absoluteY="381dp" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/wishListAmazon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="bottom"
+        android:layout_margin="16dp"
+
+
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:fabSize="normal"
+        app:layout_anchor="@+id/container"
+        app:layout_anchorGravity="right|bottom"
+        app:srcCompat="@drawable/wishlist"
+        tools:layout_editor_absoluteX="312dp"
+        tools:layout_editor_absoluteY="381dp" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/wishListSnapdeal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="bottom"
+        android:layout_margin="16dp"
+
+
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:fabSize="normal"
+        app:layout_anchor="@+id/container"
+        app:layout_anchorGravity="right|bottom"
+        app:srcCompat="@drawable/wishlist"
+        tools:layout_editor_absoluteX="312dp"
+        tools:layout_editor_absoluteY="381dp" />
 
 
 </android.support.design.widget.CoordinatorLayout>

@@ -3,6 +3,7 @@ package com.example.vicky.shoppingguide;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -19,16 +20,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ShoppingActivity extends AppCompatActivity {
+    FloatingActionButton floatingActionButtonFK,floatingActionButtonAM,floatingActionButtonSD;
 
-
+    ActionBar actionBar;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     static  final String TAG="Main";
     String flipkart="";
     String amazon="";
     String snapdeal="";
     private ViewPager mViewPager;
+    TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +41,17 @@ public class ShoppingActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        actionBar=getSupportActionBar();
+        actionBar.setTitle("Compare!!");
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
@@ -54,6 +62,42 @@ public class ShoppingActivity extends AppCompatActivity {
         amazon=bundle.getString("amazon");
         snapdeal=bundle.getString("snapdeal");
 
+        floatingActionButtonAM= (FloatingActionButton) findViewById(R.id.wishListAmazon);
+        floatingActionButtonFK= (FloatingActionButton) findViewById(R.id.wishListFlipkart);
+        floatingActionButtonSD= (FloatingActionButton) findViewById(R.id.wishListSnapdeal);
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                animateFab(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                animateFab(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 
@@ -80,6 +124,32 @@ public class ShoppingActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void animateFab(int position) {
+        switch (position) {
+            case 0:
+                floatingActionButtonAM.hide();
+                floatingActionButtonFK.show();
+                floatingActionButtonSD.hide();
+                break;
+            case 1:
+                floatingActionButtonAM.show();
+                floatingActionButtonFK.hide();
+                floatingActionButtonSD.hide();
+                break;
+            case 2:
+                floatingActionButtonAM.hide();
+                floatingActionButtonFK.hide();
+                floatingActionButtonSD.show();
+                break;
+            default:
+                floatingActionButtonAM.hide();
+                floatingActionButtonFK.show();
+                floatingActionButtonSD.hide();
+
+
+        }
+    }
+
 
 
 
@@ -95,6 +165,7 @@ public class ShoppingActivity extends AppCompatActivity {
               case 0:
                   Bundle b=new Bundle();
                   b.putString("flipkart",flipkart);
+
                   FlipkartFragment ff=new FlipkartFragment();
                   ff.setArguments(b);
                   return ff;
@@ -103,11 +174,13 @@ public class ShoppingActivity extends AppCompatActivity {
                   Bundle b1=new Bundle();
                   b1.putString("amazon",amazon);
                   AmazonFragment af=new AmazonFragment();
+
                   af.setArguments(b1);
                   return af;
               case 2:
                   Bundle b2=new Bundle();
                   b2.putString("snapdeal",snapdeal);
+
                   SnapdealFragment sf=new SnapdealFragment();
                   sf.setArguments(b2);
                   return sf;

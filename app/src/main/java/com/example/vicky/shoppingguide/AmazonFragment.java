@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import android.widget.Toast;
  */
 
 public class AmazonFragment extends Fragment {
+    private FloatingActionButton floatingActionButtonAM;
     Context context;
     WebView webView;
     static  final String TAG="Main";
@@ -33,7 +35,9 @@ public class AmazonFragment extends Fragment {
         View view=inflater.inflate(R.layout.amazon_fragment,container,false);
         string=getArguments().getString("amazon");
 
-        context=getActivity();
+        floatingActionButtonAM= (FloatingActionButton) this.getActivity().findViewById(R.id.wishListAmazon);
+
+
         return view;
     }
 
@@ -97,6 +101,13 @@ public class AmazonFragment extends Fragment {
             }
         });
         webView.loadUrl(string);
+
+        floatingActionButtonAM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),"AM FAb clicked",Toast.LENGTH_LONG).show();
+            }
+        });
 
 
     }

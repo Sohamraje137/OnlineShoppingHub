@@ -48,6 +48,8 @@ public class WishList extends Fragment {
     private void setListView(ArrayList<URL> urls) {
         URLAdapter adapter=new URLAdapter(getContext(),urls);
         listView.setAdapter(adapter);
+
+
     }
    class  DataTask extends AsyncTask<Integer,Void,ArrayList<URL>>{
         private ProgressDialog progressDialog;
@@ -70,14 +72,7 @@ public class WishList extends Fragment {
 
             setListView(urls);
             progressDialog.dismiss();
-           /*Log.i("XXXXXXXXXXX","XXXXXXXXXXXXX");
-            listView.setOnLongClickListener(new View.OnLongClickListener() {
-               @Override
-               public boolean onLongClick(View v) {
-                   Toast.makeText(getContext(),"Long Clicked",Toast.LENGTH_LONG).show();
-                   return true;
-               }
-           });*/
+
         }
     }
 

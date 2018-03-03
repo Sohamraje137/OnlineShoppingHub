@@ -54,7 +54,7 @@ public class URLAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
       view=null;
         final ViewHolder viewHolder;
        if(view==null) {
@@ -95,13 +95,23 @@ public class URLAdapter extends BaseAdapter {
                     public void onClick(DialogInterface dialog, int which) {
                         MyDatabase database=new MyDatabase(context);
                         database.delete(url.getUrl());
+                        urls.remove(i);
+                        notifyDataSetChanged();
                        // Toast.makeText(context,"Successful",Toast.LENGTH_LONG).show();
                     }
                 });
                 adb.show();
             }
         });
+        viewHolder.buttonGo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         return view;
     }
+
+
 }

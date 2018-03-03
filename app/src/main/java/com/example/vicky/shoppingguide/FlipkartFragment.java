@@ -9,7 +9,9 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -103,6 +105,22 @@ public class FlipkartFragment extends Fragment {
             }
         });
         webView.loadUrl(string);
+        webView.canGoBack();
+        webView.setOnKeyListener(new View.OnKeyListener() {
+
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK
+                        || event.getAction() == MotionEvent.ACTION_UP
+                        || webView.canGoBack()) {
+                    webView.goBack();
+                    return true;
+                }
+                return false;
+            }
+
+
+        });
         floatingActionButtonFK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

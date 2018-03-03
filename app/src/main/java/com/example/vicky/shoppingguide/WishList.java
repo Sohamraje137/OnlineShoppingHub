@@ -1,15 +1,19 @@
 package com.example.vicky.shoppingguide;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -30,15 +34,22 @@ public class WishList extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         listView= (ListView) view.findViewById(R.id.listShowWishlist);
-        MyDatabase database=new MyDatabase(getContext());
-        ArrayList<URL> urls=database.getAllurls();
-        setListView(urls);
-        //DataTask dataTask=new DataTask();
-        //dataTask.execute();
+        //MyDatabase database=new MyDatabase(getContext());
+        //ArrayList<URL> urls=database.getAllurls();
+       // setListView(urls);
+
+
+
+        DataTask dataTask=new DataTask();
+         dataTask.execute();
 
     }
 
-    /*class  DataTask extends AsyncTask<Integer,Void,ArrayList<URL>>{
+    private void setListView(ArrayList<URL> urls) {
+        URLAdapter adapter=new URLAdapter(getContext(),urls);
+        listView.setAdapter(adapter);
+    }
+   class  DataTask extends AsyncTask<Integer,Void,ArrayList<URL>>{
         private ProgressDialog progressDialog;
         @Override
         protected void onPreExecute() {
@@ -56,13 +67,19 @@ public class WishList extends Fragment {
 
         @Override
         protected void onPostExecute(ArrayList<URL> urls) {
-            progressDialog.dismiss();
-            setListView(urls);
-        }
-    }*/
 
-    private void setListView(ArrayList<URL> urls) {
-        URLAdapter adapter=new URLAdapter(getContext(),urls);
-        listView.setAdapter(adapter);
+            setListView(urls);
+            progressDialog.dismiss();
+           /*Log.i("XXXXXXXXXXX","XXXXXXXXXXXXX");
+            listView.setOnLongClickListener(new View.OnLongClickListener() {
+               @Override
+               public boolean onLongClick(View v) {
+                   Toast.makeText(getContext(),"Long Clicked",Toast.LENGTH_LONG).show();
+                   return true;
+               }
+           });*/
+        }
     }
+
+
 }

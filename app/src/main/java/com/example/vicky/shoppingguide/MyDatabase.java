@@ -63,4 +63,13 @@ public class MyDatabase extends SQLiteOpenHelper {
         }
         return urls;
     }
+
+    public void delete(String url){
+        SQLiteDatabase database=getWritableDatabase();
+
+        String condition="URL=?";
+        String[] values=new String[]{url};
+        database.delete("WISHLIST",condition,values);
+
+    }
 }

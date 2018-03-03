@@ -1,27 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:animateLayoutChanges="true"
-
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <io.github.ponnamkarthik.richlinkpreview.RichLinkView
+    <io.github.ponnamkarthik.richlinkpreview.RichLinkView
                 android:id="@+id/richLinkView"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:layout_margin="10dp">
+                >
 
-            </io.github.ponnamkarthik.richlinkpreview.RichLinkView>
+
+    </io.github.ponnamkarthik.richlinkpreview.RichLinkView>
+    <LinearLayout
+        android:animateLayoutChanges="true"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <Button
+            android:id="@+id/gotoLink"
+            android:layout_width="197dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="Go to link" />
+
+        <Button
+            android:id="@+id/deleteLink"
+            android:layout_width="187dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:text="Delete" />
         <!--
             <io.github.ponnamkarthik.richlinkpreview.RichLinkViewTelegram
                 android:layout_marginTop="16dp"
@@ -49,6 +62,6 @@
         -->
         </LinearLayout>
 
-    </ScrollView>
 
-</RelativeLayout>
+
+</LinearLayout>

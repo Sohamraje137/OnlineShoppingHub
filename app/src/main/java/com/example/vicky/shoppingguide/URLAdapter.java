@@ -3,6 +3,7 @@ package com.example.vicky.shoppingguide;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import io.github.ponnamkarthik.richlinkpreview.MetaData;
+import io.github.ponnamkarthik.richlinkpreview.RichLinkListener;
 import io.github.ponnamkarthik.richlinkpreview.RichLinkView;
 import io.github.ponnamkarthik.richlinkpreview.RichLinkViewTelegram;
 import io.github.ponnamkarthik.richlinkpreview.ViewListener;
@@ -28,9 +31,13 @@ public class URLAdapter extends BaseAdapter {
     ArrayList<URL> urls;
     String currURL="";
 
+    ArrayList<MetaData> metaData= new ArrayList<>();
     public URLAdapter(Context context, ArrayList<URL> urls){
         this.context=context;
         this.urls=urls;
+        for(int i=0;i<urls.size();i++){
+            metaData.add(null);
+        }
     }
 
     @Override
@@ -44,6 +51,17 @@ public class URLAdapter extends BaseAdapter {
     }
 
     @Override
+    public int getViewTypeCount() {
+        return getCount();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+
+    @Override
     public long getItemId(int i) {
         return i;
     }
@@ -55,14 +73,13 @@ public class URLAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
-      view=null;
+
         final ViewHolder viewHolder;
        if(view==null) {
             viewHolder=new ViewHolder();
             LayoutInflater inflater=LayoutInflater.from(context);
             view = inflater.inflate(R.layout.list_items2, viewGroup, false);
-           // view.setClickable(true);
-           // view.setOnClickListener(mylistener);
+
             viewHolder.richLinkView = (RichLinkView) view.findViewById(R.id.richLinkView);
             viewHolder.buttonGo= (Button) view.findViewById(R.id.gotoLink);
             viewHolder.buttonDelete= (Button) view.findViewById(R.id.deleteLink) ;
@@ -70,46 +87,63 @@ public class URLAdapter extends BaseAdapter {
         }
         else
             viewHolder= (ViewHolder) view.getTag();
-        final URL url=urls.get(i);
-        viewHolder.richLinkView.setLink(url.getUrl(), new ViewListener() {
+       if(urls.get(i)!=null) {
+           final URL url = urls.get(i);
+           if(metaData.get(i) != null) {
+               viewHolder.richLinkView.setLinkFromMeta(metaData.get(i));
+           }else {
+               viewHolder.richLinkView.setLink(url.getUrl(), new ViewListener() {
 
-            @Override
-            public void onSuccess(boolean status) {
+                   @Override
+                   public void onSuccess(boolean status) {
 
-            }
+                   }
 
-            @Override
-            public void onError(Exception e) {
-                Log.i("From inside","Errpr:"+e);
-            }
-        });
-        viewHolder.buttonDelete.setVisibility(View.VISIBLE);
-        viewHolder.buttonGo.setVisibility(View.VISIBLE);
-        viewHolder.buttonDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder adb= new AlertDialog.Builder(context);
-                adb.setTitle("Choose");
-                adb.setItems(new String[]{"Delete"}, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        MyDatabase database=new MyDatabase(context);
-                        database.delete(url.getUrl());
-                        urls.remove(i);
-                        notifyDataSetChanged();
-                       // Toast.makeText(context,"Successful",Toast.LENGTH_LONG).show();
-                    }
-                });
-                adb.show();
-            }
-        });
-        viewHolder.buttonGo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
+                   @Override
+                   public void onError(Exception e) {
+                       Log.i("From inside", "Errpr:" + e);
+                   }
+               });
+           }
+           viewHolder.richLinkView.setDefaultClickListener(false);
+           viewHolder.richLinkView.setClickListener(new RichLinkListener() {
+               @Override
+               public void onClicked(View view, MetaData meta) {
+                   //do stuff
+                   Toast.makeText(context, meta.getTitle(), Toast.LENGTH_SHORT).show();
+               }
+           });
+           viewHolder.buttonDelete.setVisibility(View.VISIBLE);
+           viewHolder.buttonGo.setVisibility(View.VISIBLE);
+           viewHolder.buttonDelete.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   AlertDialog.Builder adb = new AlertDialog.Builder(context);
+                   adb.setTitle("Choose");
+                   adb.setItems(new String[]{"Delete"}, new DialogInterface.OnClickListener() {
+                       @Override
+                       public void onClick(DialogInterface dialog, int which) {
+                           MyDatabase database = new MyDatabase(context);
+                           database.delete(url.getUrl());
+                           urls.remove(i);
+                           notifyDataSetChanged();
+                           // Toast.makeText(context,"Successful",Toast.LENGTH_LONG).show();
+                       }
+                   });
+                   adb.show();
+               }
+           });
+           viewHolder.buttonGo.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   //to open browser here
+                   Intent i = new Intent(context.getApplicationContext(), SingleWebView.class);
+                   i.putExtra("link", url.getUrl());
+                   i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                   context.getApplicationContext().startActivity(i);
+               }
+           });
+       }
         return view;
     }
 

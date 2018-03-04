@@ -1,5 +1,6 @@
 package com.example.vicky.shoppingguide;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -119,7 +120,8 @@ public class ShoppingActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        }
+        }else if(id == android.R.id.home)
+            onBackPressed();
 
         return super.onOptionsItemSelected(item);
     }
@@ -161,31 +163,32 @@ public class ShoppingActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-          switch (position){
-              case 0:
-                  Bundle b=new Bundle();
-                  b.putString("flipkart",flipkart);
+            switch (position) {
+                case 0:
+                    Bundle b = new Bundle();
+                    b.putString("flipkart", flipkart);
 
-                  FlipkartFragment ff=new FlipkartFragment();
-                  ff.setArguments(b);
-                  return ff;
+                    FlipkartFragment ff = new FlipkartFragment();
+                    ff.setArguments(b);
+                    return ff;
 
-              case 1:
-                  Bundle b1=new Bundle();
-                  b1.putString("amazon",amazon);
-                  AmazonFragment af=new AmazonFragment();
+                case 1:
+                    Bundle b1 = new Bundle();
+                    b1.putString("amazon", amazon);
+                    AmazonFragment af = new AmazonFragment();
 
-                  af.setArguments(b1);
-                  return af;
-              case 2:
-                  Bundle b2=new Bundle();
-                  b2.putString("snapdeal",snapdeal);
+                    af.setArguments(b1);
+                    return af;
+                case 2:
+                    Bundle b2 = new Bundle();
+                    b2.putString("snapdeal", snapdeal);
 
-                  SnapdealFragment sf=new SnapdealFragment();
-                  sf.setArguments(b2);
-                  return sf;
-              default:return null;
-          }
+                    SnapdealFragment sf = new SnapdealFragment();
+                    sf.setArguments(b2);
+                    return sf;
+                default:
+                    return null;
+            }
 
         }
 
@@ -194,5 +197,13 @@ public class ShoppingActivity extends AppCompatActivity {
 
             return 3;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Intent i=new Intent(ShoppingActivity.this,MainActivity.class);
+        startActivity(i);
+        finish();
     }
 }

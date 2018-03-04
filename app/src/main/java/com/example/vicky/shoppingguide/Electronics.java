@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -14,6 +16,7 @@ import android.widget.GridView;
  */
 
 public class Electronics extends AppCompatActivity {
+    ActionBar actionBar;
     GridView gridView;
     String[] gridViewString ={"Mobiles","Mobile Accesories","Smart Wearables","Laptops","Computer Accesories","Cameras"
     };
@@ -25,6 +28,9 @@ public class Electronics extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.electronics);
+        actionBar = getSupportActionBar();
+        actionBar.setTitle("Mobile Specification");
+        actionBar.setDisplayHomeAsUpEnabled(true);
         CustomAdaptorGridCategories customAdaptorGridCategories=new CustomAdaptorGridCategories(this,gridViewString,gridViewImageId);
         gridView=(GridView)findViewById(R.id.gridViewElectronics);
         gridView.setAdapter(customAdaptorGridCategories);
@@ -45,5 +51,27 @@ public class Electronics extends AppCompatActivity {
                     startActivity(new Intent(Electronics.this,Cameras.class));
             }
         });
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }else if(id == android.R.id.home)
+            onBackPressed();
+
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed() {
+
+        Intent i=new Intent(Electronics.this,MainActivity.class);
+        startActivity(i);
+        finish();
     }
 }

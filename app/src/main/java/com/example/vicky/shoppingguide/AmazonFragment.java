@@ -27,11 +27,11 @@ public class AmazonFragment extends Fragment {
     private FloatingActionButton floatingActionButtonAM;
     Context context;
     WebView webView;
-    String currurl;
+    String currurl="";
     static  final String TAG="Main";
    // ProgressDialog progressDialog;
     String string="";
-
+    AlertDialog.Builder alertDialog1;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,7 +60,7 @@ public class AmazonFragment extends Fragment {
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         settings.setAppCacheEnabled(true);
         settings.setDomStorageEnabled(true);
-        settings.setSavePassword(true);
+        //settings.setSavePassword(true);
         settings.setSaveFormData(true);
         settings.setEnableSmoothTransition(true);
         webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
@@ -76,7 +76,7 @@ public class AmazonFragment extends Fragment {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 Log.i(TAG,"Processing webview URL click...");
                 view.loadUrl(url);
-                currurl=url;
+
                 return true;
             }
 
@@ -126,13 +126,27 @@ public class AmazonFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                currurl=webView.getUrl();
-                URL url=new URL();
-                url.setUrl(currurl);
+                alertDialog1=new AlertDialog.Builder(getContext());
 
-                MyDatabase database=new MyDatabase(getContext());
-                database.insertDatabase(url);
-                Toast.makeText(getContext(),"Data Inserted",Toast.LENGTH_LONG).show();
+                alertDialog1.setTitle("Wish List").setMessage("Are you Sure this is a product page and that you want to add the product to Wish List?").
+                        setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                currurl=webView.getUrl();
+                                URL url=new URL();
+                                url.setUrl(currurl);
+
+                                MyDatabase database=new MyDatabase(getContext());
+                                database.insertDatabase(url);
+                                Toast.makeText(getContext(),"Data Inserted",Toast.LENGTH_LONG).show();
+                            }
+                        }).
+                        setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        }).setCancelable(true).show();
             }
         });
 

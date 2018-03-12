@@ -35,5 +35,6 @@ dependencies {
     implementation 'io.github.ponnamkarthik:richlinkpreview:1.0.8'
     compile 'org.jsoup:jsoup:1.11.2'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.github.ksoichiro:android-observablescrollview:1.6.0'
 
 }

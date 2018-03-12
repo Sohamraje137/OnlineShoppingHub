@@ -20,6 +20,7 @@ public class Women extends AppCompatActivity{
     String[] gridViewString ={"Western Wear","Lingerie","Swim and beachwear","Ethnic Wear","Jewellery","Grooming"};
     int[] gridViewImageId={
             R.drawable.western,R.drawable.lingerie,R.drawable.swimsuit,R.drawable.ethnic,R.drawable.jewel,R.drawable.grooming_wom};
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

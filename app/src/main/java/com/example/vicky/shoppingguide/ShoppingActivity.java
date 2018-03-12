@@ -66,7 +66,7 @@ public class ShoppingActivity extends AppCompatActivity {
         floatingActionButtonAM= (FloatingActionButton) findViewById(R.id.wishListAmazon);
         floatingActionButtonFK= (FloatingActionButton) findViewById(R.id.wishListFlipkart);
         floatingActionButtonSD= (FloatingActionButton) findViewById(R.id.wishListSnapdeal);
-
+        floatingActionButtonFK.show();
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

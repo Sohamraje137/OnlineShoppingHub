@@ -46,8 +46,11 @@ public class WishList extends Fragment {
     }
 
     private void setListView(ArrayList<URL> urls) {
+
+//        Log.i("Number of elements","it is "+urls.size());
         URLAdapter adapter=new URLAdapter(getContext(),urls);
         listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
 
     }

@@ -36,6 +36,7 @@ public class MyDatabase extends SQLiteOpenHelper {
 
         ContentValues cv=new ContentValues();
         cv.put("URL",url.getUrl());
+
       //  Log.i("Main","Going into db:"+url.getUrl());
         database.insert("WISHLIST",null,cv);
     }

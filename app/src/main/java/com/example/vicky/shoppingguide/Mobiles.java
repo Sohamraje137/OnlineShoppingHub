@@ -37,6 +37,7 @@ public class Mobiles extends AppCompatActivity implements AdapterView.OnItemSele
         actionBar.setTitle("Mobile Specification");
         actionBar.setDisplayHomeAsUpEnabled(true);
         editText= (EditText) findViewById(R.id.productKeyword);
+
         dropdownMethod = (Spinner) findViewById(R.id.searchMethod);
         String[] itemsMethod = {"Search by Keyword","Search by specification"};
         ArrayAdapter<String> arrayAdapterMethod = new ArrayAdapter<String>(Mobiles.this, R.layout.spinner_row, itemsMethod);

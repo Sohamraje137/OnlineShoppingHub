@@ -27,6 +27,8 @@
         <activity android:name=".Men" />
         <activity android:name=".Mobiles" />
         <activity android:name=".MobileAccesories"/>
+        <activity android:name=".Laptops"/>
+
         <activity
             android:name=".ShoppingActivity"
             android:label="@string/title_activity_shopping"

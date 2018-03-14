@@ -44,8 +44,6 @@ public class Mobiles extends AppCompatActivity implements AdapterView.OnItemSele
         dropdownMethod.setAdapter(arrayAdapterMethod);
         dropdownMethod.setOnItemSelectedListener(this);
 
-
-
         //adapter for brand only
         dropdownBrand = (Spinner) findViewById(R.id.brandName);
         String[] itemsBrand = {"I don't go by brand", "Samsung", "iPhone", "Huawei", "Oppo", "Vivo", "LG", "Xiaomi", "Lenovo", "ZTE"};
@@ -223,7 +221,7 @@ public class Mobiles extends AppCompatActivity implements AdapterView.OnItemSele
     }
     @Override
     public void onBackPressed() {
-
+        super.onBackPressed();
         Intent i=new Intent(Mobiles.this,Electronics.class);
         startActivity(i);
         finish();

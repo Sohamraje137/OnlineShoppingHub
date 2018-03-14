@@ -28,21 +28,23 @@ import io.github.ponnamkarthik.richlinkpreview.ViewListener;
 public class URLAdapter extends BaseAdapter {
     //RichLinkView richLinkView;
     Context context;
-    ArrayList<URL> urls;
+    ArrayList<URL> urls=null;
     String currURL="";
 
     ArrayList<MetaData> metaData= new ArrayList<>();
     public URLAdapter(Context context, ArrayList<URL> urls){
         this.context=context;
         this.urls=urls;
-        for(int i=0;i<urls.size();i++){
-            metaData.add(null);
+        if(urls!=null) {
+            for (int i = 0; i < urls.size(); i++) {
+                metaData.add(null);
+            }
         }
     }
 
     @Override
     public int getCount() {
-        return urls.size();
+        return (urls==null)?0:urls.size();
     }
 
     @Override
@@ -52,7 +54,7 @@ public class URLAdapter extends BaseAdapter {
 
     @Override
     public int getViewTypeCount() {
-        return getCount();
+        return (getCount()==0)?1:getCount();
     }
 
     @Override
@@ -70,6 +72,8 @@ public class URLAdapter extends BaseAdapter {
         RichLinkView richLinkView;
         Button buttonGo,buttonDelete;
     }
+
+
 
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
@@ -90,13 +94,17 @@ public class URLAdapter extends BaseAdapter {
        if(urls.get(i)!=null) {
            final URL url = urls.get(i);
            if(metaData.get(i) != null) {
-               viewHolder.richLinkView.setLinkFromMeta(metaData.get(i));
+              viewHolder.richLinkView.setLinkFromMeta(metaData.get(i));
            }else {
                viewHolder.richLinkView.setLink(url.getUrl(), new ViewListener() {
 
                    @Override
                    public void onSuccess(boolean status) {
-
+                       try {
+                           metaData.set(i, viewHolder.richLinkView.getMetaData());
+                       } catch (IndexOutOfBoundsException e) {
+                           e.printStackTrace();
+                       }
                    }
 
                    @Override
@@ -125,8 +133,10 @@ public class URLAdapter extends BaseAdapter {
                        public void onClick(DialogInterface dialog, int which) {
                            MyDatabase database = new MyDatabase(context);
                            database.delete(url.getUrl());
+
                            urls.remove(i);
-                           notifyDataSetChanged();
+                           metaData.remove(i);
+                           URLAdapter.this.notifyDataSetChanged();
                            // Toast.makeText(context,"Successful",Toast.LENGTH_LONG).show();
                        }
                    });
